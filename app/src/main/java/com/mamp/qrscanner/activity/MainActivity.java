@@ -17,8 +17,8 @@ import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
 import com.mamp.qrscanner.Constacts;
 import com.mamp.qrscanner.R;
-import com.mamp.qrscanner.StatusBarSet;
 import com.mamp.qrscanner.db.DbOpenHelper;
+import com.mamp.qrscanner.setting.StatusBarSet;
 import com.mamp.qrscanner.vo.QrDataVo;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         lastQrView = findViewById(R.id.last_qr_view);
         scanCountView = findViewById(R.id.scan_count_view);
 
-        StatusBarSet statusBar = new StatusBarSet(getWindow().getDecorView());
+        StatusBarSet statusBar = new StatusBarSet(getWindow());
         statusBar.changeIconColor();
 
         scanCountView.setText(countTodayQrData());
@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void run() {
 
+                        /* QR코드 연속 인식 */
 //                        if(insertQrData(nowQrData)) {
 //                            lastQrView.setText(nowQrData);
 //                            lastQrData = nowQrData;
@@ -87,7 +88,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 });
             }
         });
-
 
     }
 

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.ShowDataActivity">
+    tools:context=".activity.ShowDataActivity"
+    android:background="@color/colorBase">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/show_data_toolbar"
@@ -25,53 +26,28 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/search_date_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_large_25"
+            android:textSize="@dimen/text_title_20"
             android:text="@string/search_date"
             android:textColor="@color/colorAccent"/>
+
     </LinearLayout>
 
     <ListView
         android:id="@+id/qr_data_list"
         android:textFilterEnabled="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <Button
-        android:id="@+id/scan_start_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/scan_start_btn" />
-
-    <LinearLayout
-        android:id="@+id/search_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="12dp">
-
-        <Spinner
-            android:id="@+id/qr_search_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <EditText
-            android:id="@+id/search_text"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content">
-            <requestFocus/>
-        </EditText>
-
-        <Button
-            android:id="@+id/search_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/search_btn"/>
-
-    </LinearLayout>
+        android:divider="@color/colorBase"
+        android:dividerHeight="15dp"
+        android:padding="15dp"/>
 
 </LinearLayout>

@@ -2,38 +2,40 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="@drawable/qr_data_listview_radius">
 
     <ImageView
         android:id="@+id/qr_data_icon"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_weight="0.5"
+        android:src="@drawable/qr_data_icon"
+        android:layout_marginEnd="15dp"/>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="4">
+        android:layout_weight="9.5">
 
         <TextView
             android:id="@+id/qr_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="New Text"
-            android:textSize="@dimen/text_large_25"
-            android:textColor="#000000"
+            android:textSize="@dimen/text_mid_15"
+            android:textColor="@color/colorFont"
             android:gravity="center_vertical"
-            android:layout_weight="2" />
+            android:layout_marginBottom="5dp"/>
 
         <TextView
             android:id="@+id/qr_data_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="New Text"
-            android:textSize="@dimen/text_mid_15"
-            android:textColor="#666666"
-            android:layout_weight="1" />
+            android:textSize="@dimen/text_small_10"
+            android:textColor="@color/colorFont" />
     </LinearLayout>
 
 </LinearLayout>

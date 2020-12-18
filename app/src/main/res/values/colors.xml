@@ -3,8 +3,12 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#f1f1f1</color>
     <color name="colorAccent">#00b8a5</color>
-    <color name="colorBase">#f1f1f1</color>
+    <color name="colorBase">#f1f1f1</color>f
+    <color name="colorBtn">#ffffff</color>
 
     <color name="colorTextLight">#ffffff</color>
     <color name="colorTextDark">#000000</color>
+    <color name="colorListViewItem">#ffffff</color>
+
+    <color name="colorFont">#7c7c7c</color>
 </resources>
