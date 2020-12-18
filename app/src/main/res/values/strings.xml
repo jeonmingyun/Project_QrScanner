@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">QR 리더기</string>
+
+    <!--activity_main-->
+    <string name="scan_start_btn">스캔 시작</string>
+
+    <!--activity_custom_qr_scanner-->
+    <string name="switch_camera_btn">카메라 전환</string>
+    <string name="show_qr_data_btn">QR 데이터</string>
+
+    <string name="date_format">yyyy-MM-dd</string>
+    <string name="search_btn">검색</string>
+
+    <!--value/spinner-->
+    <string name="input_date">날짜</string>
+    <string name="qr_data">QR 데이터</string>
+
+    <string name="search_title">검색</string>
+    <string name="search_hint">검색</string>
+    <string name="search_date">날짜 선택</string>
+</resources>

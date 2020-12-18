@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="qr_search_array">
+        <item>@string/input_date</item>
+        <item>@string/qr_data</item>
+    </string-array>
+</resources>
