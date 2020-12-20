@@ -17,8 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:autoFocusButtonVisible="false"
-            app:flashButtonVisible="false"
-            app:maskColor="#77000000"/>
+            app:flashButtonVisible="false"/>
 
         <TextView
             android:id="@+id/scan_count_view"
@@ -29,7 +28,7 @@
             android:textSize="@dimen/text_large_25"
             android:textStyle="bold"
             android:textColor="@color/colorTextLight"
-            android:text="dd"/>
+            android:text=""/>
 
     </RelativeLayout>
 

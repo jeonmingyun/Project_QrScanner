@@ -42,9 +42,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         scanCountView = findViewById(R.id.scan_count_view);
 
         StatusBarSet statusBar = new StatusBarSet(getWindow());
-        statusBar.changeIconColor();
+        statusBar.layoutFullScreenTransparent();
+        int statusBarHeight = statusBar.getStatusBarHeight(getResources());
 
         scanCountView.setText(countTodayQrData());
+        scanCountView.setPadding(0, statusBarHeight, 0, 0);
 
         /*qr scanner start*/
         codeScanner = new CodeScanner(this, scannerView);

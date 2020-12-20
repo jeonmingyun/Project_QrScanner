@@ -51,7 +51,7 @@ public class ShowDataActivity extends AppCompatActivity implements View.OnClickL
         searchDateView.setOnClickListener(this);
 
         StatusBarSet statusBar = new StatusBarSet(getWindow());
-        statusBar.changeIconColor();
+        statusBar.statusBarTransparent();
 
         /*create action bar*/
         Toolbar toolbar = findViewById(R.id.show_data_toolbar);
