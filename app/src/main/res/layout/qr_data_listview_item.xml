@@ -23,9 +23,9 @@
             android:id="@+id/qr_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="New Text"
+            android:text="No Data"
             android:textSize="@dimen/text_mid_15"
-            android:textColor="@color/colorFont"
+            android:textColor="@color/baseText"
             android:gravity="center_vertical"
             android:layout_marginBottom="5dp"/>
 
@@ -33,9 +33,9 @@
             android:id="@+id/qr_data_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="New Text"
+            android:text="No Data"
             android:textSize="@dimen/text_small_10"
-            android:textColor="@color/colorFont" />
+            android:textColor="@color/baseText" />
     </LinearLayout>
 
 </LinearLayout>

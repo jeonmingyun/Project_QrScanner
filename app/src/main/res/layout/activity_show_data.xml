@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activity.ShowDataActivity"
-    android:background="@color/colorBase">
+    android:background="@color/baseLayout">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/show_data_toolbar"
@@ -17,37 +17,47 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="@dimen/text_title_20"
+            android:textSize="@dimen/text_large_20"
             android:text="@string/qr_data">
 
         </TextView>
 
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:padding="15dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:background="@color/subTitleLine"/>
 
         <TextView
             android:id="@+id/search_date_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_title_20"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_large_20"
             android:text="@string/search_date"
-            android:textColor="@color/colorAccent"/>
+            android:textColor="@color/colorAccent"
+            android:background="@color/baseLayout"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"/>
 
-    </LinearLayout>
+    </FrameLayout>
 
     <ListView
         android:id="@+id/qr_data_list"
         android:textFilterEnabled="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@color/colorBase"
+        android:divider="@color/baseLayout"
         android:dividerHeight="15dp"
-        android:padding="15dp"/>
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"/>
 
 </LinearLayout>

@@ -39,8 +39,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         CodeScannerView scannerView = findViewById(R.id.scanner_view);
         lastQrView = findViewById(R.id.last_qr_view);
-        scanCountView = findViewById(R.id.scan_count_view);
+        scanCountView = findViewById(R.id.scan_counter);
 
+        /*status bar setting*/
         StatusBarSet statusBar = new StatusBarSet(getWindow());
         statusBar.layoutFullScreenTransparent();
         int statusBarHeight = statusBar.getStatusBarHeight(getResources());
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if(!nowQrData.equals(lastQrData)) {
                             insertQrData(nowQrData);
 
-                            lastQrView.setText(nowQrData);
+                            lastQrView.setText("인식된 데이터 : " + nowQrData);
                             scanCountView.setText(countTodayQrData());
 
                             lastQrData = nowQrData;

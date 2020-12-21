@@ -3,12 +3,13 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#f1f1f1</color>
     <color name="colorAccent">#00b8a5</color>
-    <color name="colorBase">#f1f1f1</color>f
-    <color name="colorBtn">#ffffff</color>
+    <color name="baseLayout">#f1f1f1</color>
+    <color name="baseObject">#ffffff</color>
+    <color name="baseText">#7c7c7c</color>
 
-    <color name="colorTextLight">#ffffff</color>
-    <color name="colorTextDark">#000000</color>
-    <color name="colorListViewItem">#ffffff</color>
+    <color name="textLight">#ffffff</color>
+    <color name="textDark">#000000</color>
+    <color name="listViewItem">#ffffff</color>
+    <color name="subTitleLine">#e1e1e1</color>
 
-    <color name="colorFont">#7c7c7c</color>
 </resources>

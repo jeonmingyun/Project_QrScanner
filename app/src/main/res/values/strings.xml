@@ -18,4 +18,5 @@
     <string name="search_title">검색</string>
     <string name="search_hint">검색</string>
     <string name="search_date">날짜 선택</string>
+    <string name="last_qr_view_text">코드를 인식해주세요.</string>
 </resources>

@@ -14,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -28,6 +27,7 @@ import com.mamp.qrscanner.setting.StatusBarSet;
 import com.mamp.qrscanner.vo.QrDataVo;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class ShowDataActivity extends AppCompatActivity implements View.OnClickListener {
@@ -60,6 +60,7 @@ public class ShowDataActivity extends AppCompatActivity implements View.OnClickL
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setDisplayShowTitleEnabled(false);//기본 제목을 없애줍니다.
         actionBar.setDisplayHomeAsUpEnabled(true);
+        toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.baseObject));
 
         /*search view list*/
         setQrDataItem();
@@ -123,8 +124,14 @@ public class ShowDataActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-    private void openDatePickerDialog() {
-        DatePickerDialog dialog = new DatePickerDialog(this, listener, 2020, 11, 10);
+    public void openDatePickerDialog() {
+        Calendar calendar = Calendar.getInstance();
+
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int date = calendar.get(Calendar.DATE) ;
+
+        DatePickerDialog dialog = new DatePickerDialog(this, listener, year, month, date);
         dialog.show();
     }
 
@@ -142,10 +149,10 @@ public class ShowDataActivity extends AppCompatActivity implements View.OnClickL
                 formattedDayOfMonth = "0" + dayOfMonth;
             }
 
-            String date = year + "-" + formattedMonth + "-" + formattedDayOfMonth;
-            searchDateView.setText(date);
-
-            qrDataListAdapter.getFilter().filter(date);
+            String dateStrType1 = year + "년 " + formattedMonth + "월 " + formattedDayOfMonth + "일";
+            String dateStrType2 = year + ". " + formattedMonth + ". " + formattedDayOfMonth;
+            searchDateView.setText(dateStrType1);
+            qrDataListAdapter.getFilter().filter(dateStrType2);
         }
     };
 
@@ -159,12 +166,36 @@ public class ShowDataActivity extends AppCompatActivity implements View.OnClickL
             qrDataVo = new QrDataVo();
             qrDataVo.setId(cursor.getString(cursor.getColumnIndex(DbContract.QrData._ID)));
             qrDataVo.setQrData(cursor.getString(cursor.getColumnIndex(DbContract.QrData.COLUMN_QR_DATA)));
-            qrDataVo.setInputDate(cursor.getString(cursor.getColumnIndex(DbContract.QrData.COLUMN_INPUT_DATE)));
+            String formatDate = formatDate(cursor.getString(cursor.getColumnIndex(DbContract.QrData.COLUMN_INPUT_DATE)));
+            qrDataVo.setInputDate(formatDate);
 
             qrDataList.add(qrDataVo);
         }
 
         cursor.close();
+    }
+
+    /** @date : yyyy-MM-dd HH:mm:ss*/
+    public String formatDate(String time) {
+        String[] timeArr = time.split("-|\\s|:");
+        String year = timeArr[0];
+        String month = timeArr[1];
+        String date = timeArr[2];
+        String hour = timeArr[3];
+        String minute = timeArr[4];
+        String second = timeArr[5];
+
+        String formatDate = year + ". " + month + ". " + date + ". ";
+        String formatTime = ""; // HH:mm:ss
+        int hourInt = Integer.parseInt(hour);
+
+        if(hourInt >= 12) {
+            formatTime = "오후 " + (hourInt-12) + ":" + minute + ":" + second;
+        } else {
+            formatTime = "오전 " + hourInt + ":" + minute + ":" + second;
+        }
+
+        return formatDate + formatTime;
     }
 
     /*toolbar*/
