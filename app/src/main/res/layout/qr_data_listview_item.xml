@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:layout_weight="0.5"
         android:src="@drawable/qr_data_icon"
-        android:layout_marginEnd="15dp"/>
+        android:layout_marginEnd="@dimen/margin_large"/>
 
     <LinearLayout
         android:orientation="vertical"
@@ -27,7 +27,7 @@
             android:textSize="@dimen/text_mid_15"
             android:textColor="@color/baseText"
             android:gravity="center_vertical"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginBottom="@dimen/margin_small"/>
 
         <TextView
             android:id="@+id/qr_data_date"

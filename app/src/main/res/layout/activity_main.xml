@@ -60,18 +60,15 @@
 
             <ImageView
                 android:src="@drawable/switch_camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 style="@style/UnderBtnImageView"/>
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1.5"
-                android:gravity="center"
+                android:layout_height="wrap_content"
                 android:text="@string/switch_camera_btn"
-                android:autoSizeTextType="uniform"
-                android:autoSizeMinTextSize="@dimen/text_small_10"
-                android:autoSizeMaxTextSize="@dimen/text_large_20"
-                android:autoSizeStepGranularity="1sp"/>
+                style="@style/UnderBtnTextView"/>
 
         </LinearLayout>
         <LinearLayout
@@ -84,18 +81,15 @@
 
             <ImageView
                 android:src="@drawable/show_qr_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 style="@style/UnderBtnImageView"/>
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1.5"
-                android:gravity="center"
+                android:layout_height="wrap_content"
                 android:text="@string/show_qr_data_btn"
-                android:autoSizeTextType="uniform"
-                android:autoSizeMinTextSize="@dimen/text_small_10"
-                android:autoSizeMaxTextSize="@dimen/text_large_20"
-                android:autoSizeStepGranularity="1sp"/>
+                style="@style/UnderBtnTextView"/>
 
         </LinearLayout>
     </LinearLayout>
