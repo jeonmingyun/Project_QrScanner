@@ -21,7 +21,7 @@ import com.mamp.qrscanner.db.DbOpenHelper;
 import com.mamp.qrscanner.setting.StatusBarSet;
 import com.mamp.qrscanner.vo.QrDataVo;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private CodeScanner codeScanner;
     private TextView lastQrView, scanCountView;
     private String lastQrData = "";
@@ -57,10 +57,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onDecoded(@NonNull final Result result) {
                 runOnUiThread(new Runnable() {
                     String nowQrData = result.getText();
+
                     @Override
                     public void run() {
-
-                        /* QR코드 연속 인식 */
+                        try {
+                            /* QR코드 연속 인식 */
 //                        if(insertQrData(nowQrData)) {
 //                            lastQrView.setText(nowQrData);
 //                            lastQrData = nowQrData;
@@ -72,21 +73,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                            scanCountView.setText(countTodayQrDataStr);
 //                        }
 
-                        /*QR코드 연속 인식 제거*/
-                        if(!nowQrData.equals(lastQrData)) {
-                            insertQrData(nowQrData);
+                            /*QR코드 연속 인식 제거*/
+                            if (!nowQrData.equals(lastQrData)) {
+                                insertQrData(nowQrData);
 
-                            lastQrView.setText("인식된 데이터 : " + nowQrData);
-                            scanCountView.setText(countTodayQrData());
+                                lastQrView.setText("인식된 데이터 : " + nowQrData);
+                                /*오늘 인식된 qr 코드 개수*/
+//                                scanCountView.setText(countTodayQrData());
 
-                            lastQrData = nowQrData;
-                        } else {
-                            Toast toast = Toast.makeText(MainActivity.this, "인식된 qr 코드", Toast.LENGTH_SHORT);
-                            toast.setGravity(Gravity.CENTER,50,50);
-                            toast.show();
+                                lastQrData = nowQrData;
+                            } else {
+                                Toast toast = Toast.makeText(MainActivity.this, "인식된 qr 코드입니다", Toast.LENGTH_SHORT);
+                                toast.setGravity(Gravity.CENTER, 50, 50);
+                                toast.show();
+                            }
+
+                            codeScanner.startPreview();
+                            /*다음 인식 딜레이 1초*/
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
 
-                        codeScanner.startPreview();
                     }
                 });
             }
@@ -133,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private String countTodayQrData() {
         Cursor cursor = dbHelper.getTodayQrData();
-        String dataCount = cursor.getCount()+"";
+        String dataCount = cursor.getCount() + "";
 
         cursor.close();
 
