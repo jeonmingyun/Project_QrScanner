@@ -7,9 +7,10 @@ android {
         minSdkVersion 19
         targetSdkVersion 30
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    /* versionCode 1 / versionName "1.0.0" 등록사요 : 플레이스토어 최초 등록*/
     buildTypes {
         release {
             minifyEnabled false
