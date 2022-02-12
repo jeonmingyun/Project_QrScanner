@@ -1,3 +1,4 @@
+### 서비스 : QR 스캐너
 ### 구성 : Android App 1개
 ### APP 주요 기술 : Android Studio, Java, SQLite
 
