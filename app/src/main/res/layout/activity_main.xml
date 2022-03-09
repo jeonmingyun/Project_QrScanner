@@ -15,10 +15,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:autoFocusButtonVisible="false"
+            app:flashButtonVisible="false"
             app:frameColor="@color/colorAccent"
             app:frameCornersSize="30dp"
-            app:frameThickness="4dp"
-            app:flashButtonVisible="false"/>
+            app:frameThickness="4dp" />
 
         <TextView
             android:id="@+id/scan_counter"

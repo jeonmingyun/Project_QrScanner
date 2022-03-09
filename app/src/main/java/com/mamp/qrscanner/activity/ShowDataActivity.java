@@ -33,45 +33,72 @@ import java.util.List;
 public class ShowDataActivity extends AppCompatActivity implements View.OnClickListener {
     private DbOpenHelper dbHelper;
     private List<QrDataVo> qrDataList;
-    private TextView searchDateView;
-    private List<QrDataListViewItem> qrDataListViewItems;
     private QrDataListViewAdapter qrDataListAdapter;
+
+    private TextView searchDateView;
+    private Toolbar toolbar;
+    private StatusBarSet statusBar;
+    private ListView qrDataListView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_data);
 
-        dbHelper = new DbOpenHelper(this);
-
-        getAllQrData();
-
         searchDateView = findViewById(R.id.search_date_view);
+        toolbar = findViewById(R.id.show_data_toolbar);
+        qrDataListView = findViewById(R.id.qr_data_list);
 
         searchDateView.setOnClickListener(this);
 
-        StatusBarSet statusBar = new StatusBarSet(getWindow());
-        statusBar.statusBarTransparent();
+        dbHelper = new DbOpenHelper(this);
+        getAllQrData();
+        initStatusBar();
+        initActionBar();
+        initQrDataList(getQrDataItems(qrDataList));
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dbHelper.close();
+    }
+
+    private void initStatusBar() {
+        statusBar = new StatusBarSet(getWindow());
+        statusBar.statusBarTransparent();
+    }
+
+    private void initActionBar() {
         /*create action bar*/
-        Toolbar toolbar = findViewById(R.id.show_data_toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setDisplayShowTitleEnabled(false);//기본 제목을 없애줍니다.
         actionBar.setDisplayHomeAsUpEnabled(true);
         toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.baseObject));
-
-        /*search view list*/
-        setQrDataItem();
-        ListView qrDataListView = findViewById(R.id.qr_data_list);
-        qrDataListAdapter = new QrDataListViewAdapter(this, qrDataListViewItems);
-        qrDataListView.setAdapter(qrDataListAdapter);
-
     }
 
-    private void setQrDataItem() {
-        qrDataListViewItems = new ArrayList<>();
+    /*toolbar*/
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: {//toolbar의 back키 눌렀을 때 동작
+                finish();
+                return true;
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void initQrDataList(List<QrDataListViewItem> itemList) {
+        qrDataListAdapter = new QrDataListViewAdapter(this, itemList);
+        qrDataListView.setAdapter(qrDataListAdapter);
+    }
+
+    private List<QrDataListViewItem> getQrDataItems(List<QrDataVo> qrDataList) {
+        List<QrDataListViewItem> qrDataListViewItems = new ArrayList<>();
         QrDataListViewItem qrDataItem;
 
         for( int i = 0; i < qrDataList.size(); i++) {
@@ -82,7 +109,7 @@ public class ShowDataActivity extends AppCompatActivity implements View.OnClickL
 
             qrDataListViewItems.add(qrDataItem);
         }
-
+        return qrDataListViewItems;
     }
 
     @Override
@@ -198,16 +225,4 @@ public class ShowDataActivity extends AppCompatActivity implements View.OnClickL
         return formatDate + formatTime;
     }
 
-    /*toolbar*/
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home: {//toolbar의 back키 눌렀을 때 동작
-                finish();
-                return true;
-            }
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

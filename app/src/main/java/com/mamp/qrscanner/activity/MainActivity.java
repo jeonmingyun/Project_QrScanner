@@ -23,32 +23,81 @@ import com.mamp.qrscanner.vo.QrDataVo;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private CodeScanner codeScanner;
-    private TextView lastQrView, scanCountView;
     private String lastQrData = "";
     private DbOpenHelper dbHelper;
+
+    private StatusBarSet statusBar;
+    private TextView lastQrView, scanCountView;
+    private CodeScannerView scannerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        dbHelper = new DbOpenHelper(this);
+        scannerView = findViewById(R.id.scanner_view);
+        lastQrView = findViewById(R.id.last_qr_view);
+        scanCountView = findViewById(R.id.scan_counter);
 
         findViewById(R.id.switch_camera_btn).setOnClickListener(this);
         findViewById(R.id.show_qr_data_btn).setOnClickListener(this);
 
-        CodeScannerView scannerView = findViewById(R.id.scanner_view);
-        lastQrView = findViewById(R.id.last_qr_view);
-        scanCountView = findViewById(R.id.scan_counter);
+        dbHelper = new DbOpenHelper(this);
+        initStatusBar();
+        initTodayQrCountTextView();
+        initQrScanner();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        codeScanner.startPreview();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        codeScanner.releaseResources();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dbHelper.close();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.switch_camera_btn:
+                int cameraId = codeScanner.getCamera();
+                cameraId = cameraId == Constacts.CAMERA_BACK ? Constacts.CAMERA_FRONT : Constacts.CAMERA_BACK;
+
+                codeScanner.setCamera(cameraId);
+                break;
+            case R.id.show_qr_data_btn:
+                Intent intent = new Intent(this, ShowDataActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                Log.e("MainActivity", "no click object");
+        }
+    }
+
+    private void initStatusBar() {
         /*status bar setting*/
-        StatusBarSet statusBar = new StatusBarSet(getWindow());
+        statusBar = new StatusBarSet(getWindow());
         statusBar.layoutFullScreenTransparent();
-        int statusBarHeight = statusBar.getStatusBarHeight(getResources());
+    }
 
+    private void initTodayQrCountTextView() {
+        /*오늘 인식된 qr 코드 개수*/
+        int statusBarHeight = statusBar.getStatusBarHeight(getResources());
         scanCountView.setText(countTodayQrData());
         scanCountView.setPadding(0, statusBarHeight, 0, 0);
+    }
 
+    private void initQrScanner() {
         /*qr scanner start*/
         codeScanner = new CodeScanner(this, scannerView);
 
@@ -99,37 +148,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 });
             }
         });
-
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.switch_camera_btn:
-                int cameraId = codeScanner.getCamera();
-                cameraId = cameraId == Constacts.CAMERA_BACK ? Constacts.CAMERA_FRONT : Constacts.CAMERA_BACK;
-
-                codeScanner.setCamera(cameraId);
-                break;
-            case R.id.show_qr_data_btn:
-                Intent intent = new Intent(this, ShowDataActivity.class);
-                startActivity(intent);
-                break;
-            default:
-                Log.e("MainActivity", "no click object");
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        codeScanner.startPreview();
-    }
-
-    @Override
-    protected void onPause() {
-        codeScanner.releaseResources();
-        super.onPause();
     }
 
     private boolean insertQrData(String qrData) {
