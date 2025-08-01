@@ -1,10 +1,9 @@
 package com.mamp.qrscanner.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -21,7 +20,7 @@ import com.mamp.qrscanner.db.DbOpenHelper;
 import com.mamp.qrscanner.setting.StatusBarSet;
 import com.mamp.qrscanner.vo.QrDataVo;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends Activity implements View.OnClickListener {
     private CodeScanner codeScanner;
     private String lastQrData = "";
     private DbOpenHelper dbHelper;
@@ -103,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         codeScanner.setDecodeCallback(new DecodeCallback() {
             @Override
-            public void onDecoded(@NonNull final Result result) {
+            public void onDecoded(final Result result) {
                 runOnUiThread(new Runnable() {
                     String nowQrData = result.getText();
 

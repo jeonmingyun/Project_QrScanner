@@ -8,7 +8,7 @@
     tools:context=".activity.ShowDataActivity"
     android:background="@color/baseLayout">
 
-    <android.support.v7.widget.Toolbar
+    <android.widget.Toolbar
         android:id="@+id/show_data_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -22,7 +22,7 @@
 
         </TextView>
 
-    </android.support.v7.widget.Toolbar>
+    </android.widget.Toolbar>
 
     <FrameLayout
         android:layout_width="match_parent"

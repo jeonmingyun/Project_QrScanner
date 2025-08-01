@@ -6,8 +6,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
+
+import androidx.core.content.ContextCompat;
 
 public class PermissionActivity extends Activity {
     private static final int CAMERA_PERMISSION = 0;

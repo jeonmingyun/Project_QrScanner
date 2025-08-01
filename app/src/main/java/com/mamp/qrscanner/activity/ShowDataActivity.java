@@ -1,14 +1,10 @@
 package com.mamp.qrscanner.activity;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +13,11 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toolbar;
+
+import androidx.appcompat.widget.SearchView;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.MenuItemCompat;
 
 import com.mamp.qrscanner.R;
 import com.mamp.qrscanner.db.DbContract;
@@ -26,11 +27,13 @@ import com.mamp.qrscanner.listView.QrDataListViewItem;
 import com.mamp.qrscanner.setting.StatusBarSet;
 import com.mamp.qrscanner.vo.QrDataVo;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class ShowDataActivity extends AppCompatActivity implements View.OnClickListener {
+public class ShowDataActivity extends Activity implements View.OnClickListener {
     private DbOpenHelper dbHelper;
     private List<QrDataVo> qrDataList;
     private QrDataListViewAdapter qrDataListAdapter;
@@ -71,8 +74,10 @@ public class ShowDataActivity extends AppCompatActivity implements View.OnClickL
 
     private void initActionBar() {
         /*create action bar*/
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
+//        setSupportActionBar(toolbar);
+//        ActionBar actionBar = getSupportActionBar();
+        setActionBar(toolbar);
+        ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setDisplayShowTitleEnabled(false);//기본 제목을 없애줍니다.
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -117,7 +122,7 @@ public class ShowDataActivity extends AppCompatActivity implements View.OnClickL
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.search_menu, menu);
 
-        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.search));
         searchView.setQueryHint("QR 데이터 검색");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 

@@ -10,7 +10,7 @@
 
     <style name="UnderBtnLayout">
         <item name="android:padding">@dimen/padding_mid</item>
-        <item name="android:background">@color/baseObject</item>
+        <item name="background">@color/baseObject</item>
         <item name="android:gravity">center</item>
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>

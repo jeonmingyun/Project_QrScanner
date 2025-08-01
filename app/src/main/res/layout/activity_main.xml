@@ -59,7 +59,7 @@
             style="@style/UnderBtnLayout">
 
             <ImageView
-                android:src="@drawable/switch_camera"
+                app:srcCompat="@drawable/switch_camera"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/UnderBtnImageView"/>
@@ -80,7 +80,7 @@
             style="@style/UnderBtnLayout">
 
             <ImageView
-                android:src="@drawable/show_qr_data"
+                app:srcCompat="@drawable/show_qr_data"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/UnderBtnImageView"/>
