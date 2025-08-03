@@ -3,18 +3,19 @@ plugins {
 }
 
 android {
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.mamp.qrscanner"
         minSdk 28
-        targetSdk 34
-        versionCode 2
-        versionName "1.0.1"
+        targetSdk 35
+        versionCode 3
+        versionName "1.0.2"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     /* versionCode 1 / versionName "1.0.0" 등록사유 : 플레이스토어 최초 등록*/
     /* versionCode 2 / versionName "1.0.1" 등록사유 : 개발자 계정 유지용 버전 업데이트, qr 스캐너 라이브러리 업데이트*/
+    /* versionCode 3 / versionName "1.0.2" 등록사유 : 구글 정책 적용 - 최소 api 수준 35 */
     buildTypes {
         release {
             minifyEnabled false
