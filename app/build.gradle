@@ -30,9 +30,8 @@ android {
 dependencies {
     /*QR code scanner*/
     implementation 'com.github.yuriy-budiyev:code-scanner:2.3.2'
-    /* ver1.0.1 QR code scanner */
-//    implementation 'com.budiyev.android:code-scanner:2.1.0'
 
+    /* 오류 제거 -중복 라이브러리 */
     constraints {
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.22") {
             because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
@@ -51,12 +50,4 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-//
-//    implementation 'androidx.core:core-ktx:1.16.0'
-//    implementation 'androidx.appcompat:appcompat:1.7.1'
-//    implementation 'com.google.android.material:material:1.12.0'
-//    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
-//    testImplementation 'junit:junit:4.13.2'
-//    androidTestImplementation 'androidx.test.ext:junit:1.3.0'
-//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.7.0'
 }
