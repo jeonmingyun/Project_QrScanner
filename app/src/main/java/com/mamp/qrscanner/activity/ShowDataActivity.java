@@ -146,14 +146,13 @@ public class ShowDataActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.search_date_view :
-                openDatePickerDialog();
-                break;
-            default:
-                Log.e("ShowDataActivity", "no click object");
-        }
+        int viewId = v.getId();
 
+        if(viewId == R.id.search_date_view) {
+            openDatePickerDialog();
+        } else {
+            Log.e("ShowDataActivity", "no click object");
+        }
     }
 
     public void openDatePickerDialog() {

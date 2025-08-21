@@ -67,19 +67,17 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.switch_camera_btn:
-                int cameraId = codeScanner.getCamera();
-                cameraId = cameraId == Constacts.CAMERA_BACK ? Constacts.CAMERA_FRONT : Constacts.CAMERA_BACK;
+        int viewId = view.getId();
+        if (viewId == R.id.switch_camera_btn) {
+            int cameraId = codeScanner.getCamera();
+            cameraId = cameraId == Constacts.CAMERA_BACK ? Constacts.CAMERA_FRONT : Constacts.CAMERA_BACK;
 
-                codeScanner.setCamera(cameraId);
-                break;
-            case R.id.show_qr_data_btn:
-                Intent intent = new Intent(this, ShowDataActivity.class);
-                startActivity(intent);
-                break;
-            default:
-                Log.e("MainActivity", "no click object");
+            codeScanner.setCamera(cameraId);
+        } else if (viewId == R.id.show_qr_data_btn) {
+            Intent intent = new Intent(this, ShowDataActivity.class);
+            startActivity(intent);
+        } else {
+            Log.e("MainActivity", "no click object");
         }
     }
 
