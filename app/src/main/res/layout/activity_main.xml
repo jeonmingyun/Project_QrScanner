@@ -1,97 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/last_qr_view">
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <com.budiyev.android.codescanner.CodeScannerView
-            android:id="@+id/scanner_view"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:autoFocusButtonVisible="false"
-            app:flashButtonVisible="false"
-            app:frameColor="@color/colorAccent"
-            app:frameCornersSize="30dp"
-            app:frameThickness="4dp" />
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/last_qr_view"
+            android:layout_above="@id/last_qr_view">
+
+            <com.budiyev.android.codescanner.CodeScannerView
+                android:id="@+id/scanner_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:autoFocusButtonVisible="false"
+                app:flashButtonVisible="false"
+                app:frameColor="@color/colorAccent"
+                app:frameCornersSize="30dp"
+                app:frameThickness="4dp" />
+
+            <TextView
+                android:id="@+id/scan_counter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|start"
+                android:layout_margin="@dimen/margin_small"
+                android:textSize="@dimen/text_qr_counter"
+                android:textStyle="bold"
+                android:textColor="@color/textLight"
+                android:text=""/>
+
+        </RelativeLayout>
 
         <TextView
-            android:id="@+id/scan_counter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top|start"
-            android:layout_margin="@dimen/margin_small"
-            android:textSize="@dimen/text_qr_counter"
-            android:textStyle="bold"
-            android:textColor="@color/textLight"
-            android:text=""/>
-
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/last_qr_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/under_btn_layout"
-        android:padding="@dimen/padding_mid"
-        android:gravity="center"
-        android:text="@string/last_qr_view_text" />
-
-    <LinearLayout
-        android:id="@+id/under_btn_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
-        android:gravity="center_horizontal|center_vertical">
+            android:id="@+id/last_qr_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/under_btn_layout"
+            android:layout_above="@id/under_btn_layout"
+            android:padding="@dimen/padding_mid"
+            android:gravity="center"
+            android:text="@string/last_qr_view_text" />
 
         <LinearLayout
-            android:id="@+id/switch_camera_btn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5"
-            android:orientation="vertical"
-            style="@style/UnderBtnLayout">
+            android:id="@+id/under_btn_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_horizontal|center_vertical">
 
-            <ImageView
-                app:srcCompat="@drawable/switch_camera"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/UnderBtnImageView"/>
+            <LinearLayout
+                android:id="@+id/switch_camera_btn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:orientation="vertical"
+                style="@style/UnderBtnLayout">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/switch_camera_btn"
-                style="@style/UnderBtnTextView"/>
+                <ImageView
+                    app:srcCompat="@drawable/switch_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/UnderBtnImageView"/>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/switch_camera_btn"
+                    style="@style/UnderBtnTextView"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/show_qr_data_btn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:orientation="vertical"
+                style="@style/UnderBtnLayout">
+
+                <ImageView
+                    app:srcCompat="@drawable/show_qr_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/UnderBtnImageView"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/show_qr_data_btn"
+                    style="@style/UnderBtnTextView"/>
+
+            </LinearLayout>
         </LinearLayout>
-        <LinearLayout
-            android:id="@+id/show_qr_data_btn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5"
-            android:orientation="vertical"
-            style="@style/UnderBtnLayout">
-
-            <ImageView
-                app:srcCompat="@drawable/show_qr_data"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/UnderBtnImageView"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/show_qr_data_btn"
-                style="@style/UnderBtnTextView"/>
-
-        </LinearLayout>
-    </LinearLayout>
-
-</RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

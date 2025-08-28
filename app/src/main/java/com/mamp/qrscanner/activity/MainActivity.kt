@@ -8,6 +8,8 @@ import android.view.Gravity
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.CodeScannerView
 import com.budiyev.android.codescanner.DecodeCallback
@@ -31,6 +33,7 @@ class MainActivity : Activity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        initSystemBar(findViewById(R.id.main))
 
         scannerView = findViewById<CodeScannerView>(R.id.scanner_view)
         lastQrView = findViewById<TextView>(R.id.last_qr_view)
@@ -73,6 +76,15 @@ class MainActivity : Activity(), View.OnClickListener {
             startActivity(intent)
         } else {
             Log.e("MainActivity", "no click object")
+        }
+    }
+
+    // Android 하단 system bar 인식
+    private fun initSystemBar(rootView: View) {
+        ViewCompat.setOnApplyWindowInsetsListener(rootView) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
         }
     }
 
