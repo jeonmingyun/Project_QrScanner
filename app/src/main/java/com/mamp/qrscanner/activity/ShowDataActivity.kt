@@ -113,19 +113,23 @@ class ShowDataActivity : Activity(), View.OnClickListener {
         val inflater: MenuInflater = getMenuInflater()
         inflater.inflate(R.menu.search_menu, menu)
 
-        val searchView = MenuItemCompat.getActionView(menu.findItem(R.id.search)) as SearchView
-        searchView.setQueryHint("QR 데이터 검색")
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(s: String?): Boolean {
-                return false
-            }
+        val searchView = MenuItemCompat.getActionView(menu.findItem(R.id.search)) as? SearchView
+        if(searchView == null) {
+            Log.e("ShowDataActivity", "SearchView를 찾을 수 없거나 타입이 올바르지 않습니다.")
+        } else {
+            searchView.setQueryHint("QR 데이터 검색")
+            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(s: String?): Boolean {
+                    return false
+                }
 
-            override fun onQueryTextChange(s: String?): Boolean {
-                qrDataListAdapter?.getFilter()?.filter(s)
+                override fun onQueryTextChange(s: String?): Boolean {
+                    qrDataListAdapter?.getFilter()?.filter(s)
 
-                return false
-            }
-        })
+                    return false
+                }
+            })
+        }
 
         return super.onCreateOptionsMenu(menu)
     }
