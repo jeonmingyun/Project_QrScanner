@@ -22,12 +22,12 @@ import com.mamp.qrscanner.db.DbOpenHelper
 import com.mamp.qrscanner.listView.QrDataListViewAdapter
 import com.mamp.qrscanner.listView.QrDataListViewItem
 import com.mamp.qrscanner.setting.StatusBarSet
-import com.mamp.qrscanner.vo.QrDataVo
+import com.mamp.qrscanner.model.QrDataModel
 import java.util.Calendar
 
 class ShowDataActivity : Activity(), View.OnClickListener {
     private var dbHelper: DbOpenHelper? = null
-    private var qrDataList: MutableList<QrDataVo?>? = null
+    private var qrDataList: MutableList<QrDataModel?>? = null
     private var qrDataListAdapter: QrDataListViewAdapter? = null
 
     private var searchDateView: TextView? = null
@@ -92,7 +92,7 @@ class ShowDataActivity : Activity(), View.OnClickListener {
         qrDataListView!!.setAdapter(qrDataListAdapter)
     }
 
-    private fun getQrDataItems(qrDataList: MutableList<QrDataVo?>?): MutableList<QrDataListViewItem?> {
+    private fun getQrDataItems(qrDataList: MutableList<QrDataModel?>?): MutableList<QrDataListViewItem?> {
         val qrDataListViewItems: MutableList<QrDataListViewItem?> = ArrayList<QrDataListViewItem?>()
         var qrDataItem: QrDataListViewItem?
 
@@ -180,19 +180,19 @@ class ShowDataActivity : Activity(), View.OnClickListener {
         /*show all qr data in DB*/
         get() {
             val cursor = dbHelper?.allQrData
-            qrDataList = ArrayList<QrDataVo?>()
-            var qrDataVo: QrDataVo?
+            qrDataList = ArrayList<QrDataModel?>()
+            var qrDataModel: QrDataModel?
 
             while (cursor != null && cursor.moveToNext()) {
-                qrDataVo = QrDataVo()
-                qrDataVo.id = cursor.getString(cursor.getColumnIndex(BaseColumns._ID) as Int)
-                qrDataVo.qrData =
+                qrDataModel = QrDataModel()
+                qrDataModel.id = cursor.getString(cursor.getColumnIndex(BaseColumns._ID) as Int)
+                qrDataModel.qrData =
                     cursor.getString(cursor.getColumnIndex(DbContract.QrData.COLUMN_QR_DATA) as Int)
                 val formatDate =
                     formatDate(cursor.getString(cursor.getColumnIndex(DbContract.QrData.COLUMN_INPUT_DATE) as Int))
-                qrDataVo.inputDate = formatDate
+                qrDataModel.inputDate = formatDate
 
-                qrDataList!!.add(qrDataVo)
+                qrDataList!!.add(qrDataModel)
             }
 
             cursor?.close()

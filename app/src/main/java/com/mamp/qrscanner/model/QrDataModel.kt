@@ -1,10 +1,7 @@
-package com.mamp.qrscanner.vo
+package com.mamp.qrscanner.model
 
-class QrDataVo {
-    @JvmField
+class QrDataModel {
     var id: String? = null
-    @JvmField
     var qrData: String? = null
-    @JvmField
     var inputDate: String? = null
 }

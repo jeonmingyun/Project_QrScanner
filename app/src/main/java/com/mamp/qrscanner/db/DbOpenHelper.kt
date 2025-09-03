@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.provider.BaseColumns
 import com.mamp.qrscanner.R
 import com.mamp.qrscanner.db.DbContract.QrData
-import com.mamp.qrscanner.vo.QrDataVo
+import com.mamp.qrscanner.model.QrDataModel
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -77,7 +77,7 @@ class DbOpenHelper(private val mContext: Context) :
             )
         }
 
-    fun insertQrData(vo: QrDataVo): Boolean {
+    fun insertQrData(vo: QrDataModel): Boolean {
         db = this.writableDatabase
 
         val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")

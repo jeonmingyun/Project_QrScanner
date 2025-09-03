@@ -18,7 +18,7 @@ import com.mamp.qrscanner.Constacts
 import com.mamp.qrscanner.R
 import com.mamp.qrscanner.db.DbOpenHelper
 import com.mamp.qrscanner.setting.StatusBarSet
-import com.mamp.qrscanner.vo.QrDataVo
+import com.mamp.qrscanner.model.QrDataModel
 
 class MainActivity : Activity(), View.OnClickListener {
     private var codeScanner: CodeScanner? = null
@@ -157,10 +157,10 @@ class MainActivity : Activity(), View.OnClickListener {
     }
 
     private fun insertQrData(qrData: String?): Boolean {
-        val qrDataVo = QrDataVo()
-        qrDataVo.qrData = qrData
+        val qrDataModel = QrDataModel()
+        qrDataModel.qrData = qrData
 
-        return dbHelper!!.insertQrData(qrDataVo)
+        return dbHelper!!.insertQrData(qrDataModel)
     }
 
     private fun countTodayQrData(): String {
