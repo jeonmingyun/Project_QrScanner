@@ -1,15 +1,14 @@
-package com.mamp.qrscanner.viewModel
+package com.mamp.qrscanner.view.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.mamp.qrscanner.view.base.BaseViewModel
 
-class QrDataViewModel: ViewModel() {
+class MainViewModel: BaseViewModel() {
     private val _count = MutableLiveData<Int>(0)
     val count: LiveData<Int> = _count
 
     fun onButtonClicked() {
-        val current = _count.value ?: 0
-        _count.value = current + 1
+        _count.value = _count.value!! + 1
     }
 }

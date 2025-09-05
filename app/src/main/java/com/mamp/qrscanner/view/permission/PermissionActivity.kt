@@ -1,15 +1,16 @@
-package com.mamp.qrscanner.activity
+package com.mamp.qrscanner.view.permission
 
 import android.Manifest
-import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.mamp.qrscanner.view.base.BaseActivity
+import com.mamp.qrscanner.view.main.MainActivity
 
-class PermissionActivity : Activity() {
+class PermissionActivity : BaseActivity() {
     // 권한 요청 팝엄이 닫기면 호출되는 메소드
     override fun onRequestPermissionsResult(
         requestCode: Int,

@@ -1,6 +1,5 @@
-package com.mamp.qrscanner.activity
+package com.mamp.qrscanner.view.showData
 
-import android.app.Activity
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.provider.BaseColumns
@@ -21,11 +20,12 @@ import com.mamp.qrscanner.db.DbContract
 import com.mamp.qrscanner.db.DbOpenHelper
 import com.mamp.qrscanner.listView.QrDataListViewAdapter
 import com.mamp.qrscanner.listView.QrDataListViewItem
-import com.mamp.qrscanner.setting.StatusBarSet
 import com.mamp.qrscanner.model.QrDataModel
+import com.mamp.qrscanner.setting.StatusBarSet
+import com.mamp.qrscanner.view.base.BaseActivity
 import java.util.Calendar
 
-class ShowDataActivity : Activity(), View.OnClickListener {
+class ShowDataActivity : BaseActivity(), View.OnClickListener {
     private var dbHelper: DbOpenHelper? = null
     private var qrDataList: MutableList<QrDataModel?>? = null
     private var qrDataListAdapter: QrDataListViewAdapter? = null

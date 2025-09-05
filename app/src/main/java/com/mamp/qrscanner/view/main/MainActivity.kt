@@ -1,6 +1,5 @@
-package com.mamp.qrscanner.activity
+package com.mamp.qrscanner.view.main
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -17,10 +16,12 @@ import com.google.zxing.Result
 import com.mamp.qrscanner.Constacts
 import com.mamp.qrscanner.R
 import com.mamp.qrscanner.db.DbOpenHelper
-import com.mamp.qrscanner.setting.StatusBarSet
 import com.mamp.qrscanner.model.QrDataModel
+import com.mamp.qrscanner.setting.StatusBarSet
+import com.mamp.qrscanner.view.base.BaseActivity
+import com.mamp.qrscanner.view.showData.ShowDataActivity
 
-class MainActivity : Activity(), View.OnClickListener {
+class MainActivity : BaseActivity(), View.OnClickListener {
     private var codeScanner: CodeScanner? = null
     private var lastQrData: String? = ""
     private var dbHelper: DbOpenHelper? = null
