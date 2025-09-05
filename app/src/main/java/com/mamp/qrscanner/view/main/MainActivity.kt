@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
 import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.CodeScannerView
 import com.budiyev.android.codescanner.DecodeCallback
@@ -22,6 +23,7 @@ import com.mamp.qrscanner.view.base.BaseActivity
 import com.mamp.qrscanner.view.showData.ShowDataActivity
 
 class MainActivity : BaseActivity(), View.OnClickListener {
+    private val TAG = javaClass.simpleName
     private var codeScanner: CodeScanner? = null
     private var lastQrData: String? = ""
     private var dbHelper: DbOpenHelper? = null
@@ -30,11 +32,15 @@ class MainActivity : BaseActivity(), View.OnClickListener {
     private var lastQrView: TextView? = null
     private var scanCountView: TextView? = null
     private var scannerView: CodeScannerView? = null
+    private var mainViewModel: MainViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initSystemBar(findViewById(R.id.main))
+
+        // init view model
+        initViewModel()
 
         scannerView = findViewById<CodeScannerView>(R.id.scanner_view)
         lastQrView = findViewById<TextView>(R.id.last_qr_view)
@@ -67,17 +73,20 @@ class MainActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(view: View) {
         val viewId = view.getId()
         if (viewId == R.id.switch_camera_btn) {
-            var cameraId = codeScanner!!.getCamera()
-            cameraId =
-                if (cameraId == Constacts.CAMERA_BACK) Constacts.CAMERA_FRONT else Constacts.CAMERA_BACK
-
-            codeScanner!!.setCamera(cameraId)
+            if(codeScanner != null)
+                mainViewModel!!.onSwitchCameraBtnClicked(codeScanner!!)
+            else
+                logE("code scanner is null")
         } else if (viewId == R.id.show_qr_data_btn) {
-            val intent = Intent(this, ShowDataActivity::class.java)
-            startActivity(intent)
+            openShowDataActivity()
         } else {
-            Log.e("MainActivity", "no click object")
+            logE("no click object")
         }
+    }
+
+    private fun openShowDataActivity() {
+        val intent = Intent(this, ShowDataActivity::class.java)
+        startActivity(intent)
     }
 
     // Android 하단 system bar 인식
@@ -87,6 +96,10 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
+
+    private fun initViewModel() {
+        mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
     }
 
     private fun initStatusBar() {
