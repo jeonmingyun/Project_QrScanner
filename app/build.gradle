@@ -40,6 +40,7 @@ android {
 }
 
 dependencies {
+
     /*QR code scanner*/
     implementation 'com.github.yuriy-budiyev:code-scanner:2.3.2'
 
@@ -52,6 +53,9 @@ dependencies {
             because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib")
         }
     }
+
+    /* 기본 라이브러리 추가 */
+    implementation 'androidx.activity:activity-ktx:1.10.1'
 
     /*default*/
     implementation fileTree(dir: 'libs', include: ['*.jar'])

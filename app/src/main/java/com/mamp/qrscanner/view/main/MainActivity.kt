@@ -2,14 +2,13 @@ package com.mamp.qrscanner.view.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.ViewModelProvider
 import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.CodeScannerView
 import com.budiyev.android.codescanner.DecodeCallback
@@ -32,15 +31,12 @@ class MainActivity : BaseActivity(), View.OnClickListener {
     private var lastQrView: TextView? = null
     private var scanCountView: TextView? = null
     private var scannerView: CodeScannerView? = null
-    private var mainViewModel: MainViewModel? = null
+    private val mainViewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initSystemBar(findViewById(R.id.main))
-
-        // init view model
-        initViewModel()
 
         scannerView = findViewById<CodeScannerView>(R.id.scanner_view)
         lastQrView = findViewById<TextView>(R.id.last_qr_view)
@@ -53,6 +49,18 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         initStatusBar()
         initTodayQrCountTextView()
         initQrScanner()
+
+        // ViewModel observer
+        observeViewModel()
+    }
+
+    private fun observeViewModel() {
+        mainViewModel.cameraId.observe(this) { cameraId ->
+            if(codeScanner == null)
+                initQrScanner() // codeScanner 초기화
+
+            codeScanner?.camera = cameraId
+        }
     }
 
     override fun onResume() {
@@ -73,9 +81,9 @@ class MainActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(view: View) {
         val viewId = view.getId()
         if (viewId == R.id.switch_camera_btn) {
-            if(codeScanner != null)
-                mainViewModel!!.onSwitchCameraBtnClicked(codeScanner!!)
-            else
+            if(codeScanner != null) {
+                mainViewModel.onSwitchCameraBtnClicked()
+            } else
                 logE("code scanner is null")
         } else if (viewId == R.id.show_qr_data_btn) {
             openShowDataActivity()
@@ -96,10 +104,6 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-    }
-
-    private fun initViewModel() {
-        mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
     }
 
     private fun initStatusBar() {
