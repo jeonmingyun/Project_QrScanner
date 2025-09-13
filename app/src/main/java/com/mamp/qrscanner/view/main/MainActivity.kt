@@ -13,7 +13,6 @@ import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.CodeScannerView
 import com.budiyev.android.codescanner.DecodeCallback
 import com.google.zxing.Result
-import com.mamp.qrscanner.Constacts
 import com.mamp.qrscanner.R
 import com.mamp.qrscanner.db.DbOpenHelper
 import com.mamp.qrscanner.model.QrDataModel
@@ -36,16 +35,19 @@ class MainActivity : BaseActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initSystemBar(findViewById(R.id.main))
+        dbHelper = DbOpenHelper(this)
 
+        // view
         scannerView = findViewById<CodeScannerView>(R.id.scanner_view)
         lastQrView = findViewById<TextView>(R.id.last_qr_view)
         scanCountView = findViewById<TextView>(R.id.scan_counter)
 
+        // click listener
         findViewById<View?>(R.id.switch_camera_btn).setOnClickListener(this)
         findViewById<View?>(R.id.show_qr_data_btn).setOnClickListener(this)
 
-        dbHelper = DbOpenHelper(this)
+        // view init
+        initSystemBar(findViewById(R.id.main))
         initStatusBar()
         initTodayQrCountTextView()
         initQrScanner()
