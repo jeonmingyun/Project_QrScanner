@@ -14,7 +14,7 @@ class PermissionActivity : BaseActivity() {
     // 권한 요청 팝엄이 닫기면 호출되는 메소드
     override fun onRequestPermissionsResult(
         requestCode: Int,
-        permissions: Array<String?>,
+        permissions: Array<out String>,
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
